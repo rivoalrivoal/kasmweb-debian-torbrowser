@@ -11,6 +11,4 @@ RUN apt-get update && \
 RUN rm -rf /home/kasm-user/.local && \
     rm -rf /home/kasm-user/.cache
 
-COPY ./kasmvnc.yaml /etc/kasmvnc/kasmvnc.yaml
-
 USER 1000
