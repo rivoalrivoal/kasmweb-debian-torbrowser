@@ -2,8 +2,8 @@ FROM kasmweb/core-debian-bookworm:1.16.1
 
 USER root
 
-# 
-RUN sed -i "s|UI\.initSetting('path', 'websockify');|UI.initSetting('path', window.location.pathname.replace(/[^/]*$/, '').substring(1) + 'websockify');|" /usr/share/kasmvnc/www/app/ui.js
+# Fix reverse proxy websocket
+RUN sed -i "s|UI\.initSetting('path', 'websockify');|UI.initSetting('path', window.location.pathname.replace(/[^/]*$/, '').substring(1) + 'websockify');|" /usr/share/kasmvnc/www/dist/main.bundle.js
 
 # Tor Browser
 RUN echo "deb http://deb.debian.org/debian/ bookworm main contrib non-free" > /etc/apt/sources.list
