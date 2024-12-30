@@ -24,6 +24,6 @@ else
   exit 1
 fi
 
-echo $socks_proxy > $HOME/toto.txt
+torbrowser-launcher
 
 tail -f /dev/null
