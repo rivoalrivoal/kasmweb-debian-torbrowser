@@ -10,17 +10,18 @@ RUN echo "deb http://deb.debian.org/debian/ bookworm main contrib non-free" > /e
 RUN apt-get update && \
     apt-get install -y torbrowser-launcher
 
-# Google Chrome
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && \
-    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list
-RUN apt-get update && \
-    apt-get install -y google-chrome-stable
-
 # Firefox
 RUN wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null && \
     echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" > /etc/apt/sources.list
 RUN apt-get update && \
     apt-get install -y firefox
+COPY ./firefox-custom-prefs.js /usr/lib/firefox/defaults/pref/custom-prefs.js
+# Because container run as user
+RUN chmod 777 -R /usr/lib/firefox/defaults/pref/
+
+# Custom init script on startup
+COPY ./custom_startup.sh /dockerstartup/custom_startup.sh
+RUN chmod +x /dockerstartup/custom_startup.sh
 
 # Clean this because created by root (?)
 RUN rm -rf /home/kasm-user/.local && \
