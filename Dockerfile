@@ -5,6 +5,11 @@ USER root
 # Fix reverse proxy websocket
 RUN sed -i "s|UI\.initSetting('path', 'websockify');|UI.initSetting('path', window.location.pathname.replace(/[^/]*$/, '').substring(1) + 'websockify');|" /usr/share/kasmvnc/www/dist/main.bundle.js
 
+# Brave
+ADD https://raw.githubusercontent.com/kasmtech/workspaces-images/refs/heads/develop/src/ubuntu/install/brave/install_brave.sh /tmp/brave/install_brave.sh
+RUN mkdir /home/kasm-user/Desktop/ && \
+    bash /tmp/brave/install_brave.sh && rm -rf /tmp/brave/
+
 # Tor Browser
 RUN echo "deb http://deb.debian.org/debian/ bookworm main contrib non-free" > /etc/apt/sources.list
 RUN apt-get update && \
