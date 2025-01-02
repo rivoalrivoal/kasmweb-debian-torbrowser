@@ -26,4 +26,5 @@ fi
 
 torbrowser-launcher
 
-tail -f /dev/null
+touch $MOZ_LOG_FILE
+tail -f ${MOZ_LOG_FILE}.moz_log.0 | grep "nsHttp uri="
