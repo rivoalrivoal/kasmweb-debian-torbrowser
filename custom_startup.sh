@@ -29,8 +29,8 @@ folder="$HOME/.config/BraveSoftware/Brave-Browser"
 # Fix lock profile Brave
 rm -f $folder/SingletonLock
 
-# brave-browser
-sleep 5
+brave-browser
+sleep 30
 
 # tail chrome debug : Brave logging
 file="$folder/chrome_debug.log"
