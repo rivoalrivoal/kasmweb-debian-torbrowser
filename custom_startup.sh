@@ -30,4 +30,15 @@ rm -f $folder/SingletonLock
 # tail chrome debug : Brave logging
 file="$folder/chrome_debug.log"
 brave-browser
-tail -F $file
+
+while true; do
+  if [[ -f "$file" ]]; then
+    tail -F "$file"
+  else
+    echo "File $file not found, waiting..."
+    while [[ ! -f "$file" ]]; do
+      sleep 1
+    done
+    echo "Fichier $file found, resuming monitoring..."
+  fi
+done
