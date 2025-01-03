@@ -1,7 +1,3 @@
 {
-    "TorDisabled": false,
-    "ProxySettings": {
-        "ProxyMode": "fixed_servers",
-        "ProxyServer": "__SOCKS_PROXY__"
-    }
+    "TorDisabled": false
 }
