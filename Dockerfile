@@ -10,7 +10,7 @@ ADD https://raw.githubusercontent.com/kasmtech/workspaces-images/refs/heads/deve
 RUN mkdir /home/kasm-user/Desktop/ && \
     bash /tmp/brave/install_brave.sh && rm -rf /tmp/brave/
 COPY ./brave-policy.json /etc/brave/policies/managed/disable_tor.json
-RUN sed -i 's/--password-store=basic/& --proxy-server="${HTTPS_PROXY}"/g' /usr/bin/brave-browser
+RUN sed -i 's/--password-store=basic/& --proxy-server="${https_proxy}"/g' /usr/bin/brave-browser
 
 # Tor Browser
 RUN echo "deb http://deb.debian.org/debian/ bookworm main contrib non-free" > /etc/apt/sources.list
