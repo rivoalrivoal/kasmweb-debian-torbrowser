@@ -13,8 +13,19 @@ fi
 
 echo "Extracted SOCKS Proxy: $socks_proxy"
 
-# Replace __SOCKS_PROXY__ in the file
+# Replace __SOCKS_PROXY__ in the firefox prefs file
 file="/usr/lib/firefox/defaults/pref/custom-prefs.js"
+
+if [ -f "$file" ]; then
+  sed -i "s/__SOCKS_PROXY__/$socks_proxy/g" "$file"
+  echo "File updated: $file"
+else
+  echo "File not found: $file"
+  exit 1
+fi
+
+# Replace __SOCKS_PROXY__ in the brave policy file
+file="/etc/brave/policies/managed/disable_tor.json"
 
 if [ -f "$file" ]; then
   sed -i "s/__SOCKS_PROXY__/$socks_proxy/g" "$file"

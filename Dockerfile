@@ -9,6 +9,7 @@ RUN sed -i "s|UI\.initSetting('path', 'websockify');|UI.initSetting('path', wind
 ADD https://raw.githubusercontent.com/kasmtech/workspaces-images/refs/heads/develop/src/ubuntu/install/brave/install_brave.sh /tmp/brave/install_brave.sh
 RUN mkdir /home/kasm-user/Desktop/ && \
     bash /tmp/brave/install_brave.sh && rm -rf /tmp/brave/
+COPY ./brave-policy.json /etc/brave/policies/managed/disable_tor.json
 
 # Tor Browser
 RUN echo "deb http://deb.debian.org/debian/ bookworm main contrib non-free" > /etc/apt/sources.list
