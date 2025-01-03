@@ -27,5 +27,6 @@ fi
 brave-browser
 
 file="~/.config/BraveSoftware/Brave-Browser/chrome_debug.log"
+mkdir -p ~/.config/BraveSoftware/Brave-Browser
 touch $file
 tail -F $file
