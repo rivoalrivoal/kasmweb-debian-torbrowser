@@ -24,9 +24,13 @@ else
   exit 1
 fi
 
+folder="$HOME/.config/BraveSoftware/Brave-Browser"
+
+# Fix lock profile Brave
+rm $folder/SingletonLock
 brave-browser
 
-folder="$HOME/.config/BraveSoftware/Brave-Browser"
+# tail chrome debug : Brave logging
 file="$folder/chrome_debug.log"
 mkdir -p $folder
 touch $file
