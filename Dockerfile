@@ -32,7 +32,7 @@ RUN mkdir -p /home/kasm-user/Desktop/ && \
     bash /tmp/brave/install_vs_code.sh && rm -rf /tmp/brave/
 
 # Utils
-RUN apt-get update && apt-get install -y nano nmap proxychains
+RUN apt-get update && apt-get install -y nano nmap proxychains telnet
 
 # Custom init script on startup
 COPY ./custom_startup.sh /dockerstartup/custom_startup.sh
