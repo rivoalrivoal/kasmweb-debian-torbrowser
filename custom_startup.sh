@@ -24,6 +24,8 @@ else
   exit 1
 fi
 
-torbrowser-launcher
+brave-browser
 
-tail -f /dev/null
+file="~/.config/BraveSoftware/Brave-Browser/chrome_debug.log"
+touch $file
+tail -F $file
