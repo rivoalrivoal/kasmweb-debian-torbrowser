@@ -25,12 +25,15 @@ else
 fi
 
 folder="$HOME/.config/BraveSoftware/Brave-Browser"
+
 # Fix lock profile Brave
 rm -f $folder/SingletonLock
+
+brave-browser
+sleep 5
+
 # tail chrome debug : Brave logging
 file="$folder/chrome_debug.log"
-brave-browser
-
 while true; do
   if [[ -f "$file" ]]; then
     tail -F "$file"
