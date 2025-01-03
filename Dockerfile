@@ -7,7 +7,7 @@ RUN sed -i "s|UI\.initSetting('path', 'websockify');|UI.initSetting('path', wind
 
 # Brave
 ADD https://raw.githubusercontent.com/kasmtech/workspaces-images/refs/heads/develop/src/ubuntu/install/brave/install_brave.sh /tmp/brave/install_brave.sh
-RUN mkdir /home/kasm-user/Desktop/ && \
+RUN mkdir -p /home/kasm-user/Desktop/ && \
     bash /tmp/brave/install_brave.sh && rm -rf /tmp/brave/
 COPY ./brave-policy.json /etc/brave/policies/managed/disable_tor.json
 RUN sed -i 's/--password-store=basic/& --enable-logging --v=1 --proxy-server="${https_proxy}"/g' /usr/bin/brave-browser
@@ -25,6 +25,14 @@ RUN apt-get update && \
 COPY ./firefox-custom-prefs.js /usr/lib/firefox/defaults/pref/custom-prefs.js
 # Because container run as user
 RUN chmod 777 -R /usr/lib/firefox/defaults/pref/
+
+# VS Code
+ADD https://raw.githubusercontent.com/kasmtech/workspaces-images/refs/heads/develop/src/ubuntu/install/vs_code/install_vs_code.sh /tmp/brave/install_vs_code.sh
+RUN mkdir -p /home/kasm-user/Desktop/ && \
+    bash /tmp/brave/install_vs_code.sh && rm -rf /tmp/brave/
+
+# Utils
+RUN apt-get update && apt-get install -y nano nmap proxychains
 
 # Custom init script on startup
 COPY ./custom_startup.sh /dockerstartup/custom_startup.sh
