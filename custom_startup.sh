@@ -13,8 +13,14 @@ fi
 
 echo "Extracted SOCKS Proxy: $socks_proxy"
 
-# Replace __SOCKS_PROXY__ in the firefox prefs file
-file="/usr/lib/firefox/defaults/pref/custom-prefs.js"
+# Tor Browser Config
+rm -rf $HOME/tor-browser
+mkdir -p $HOME/tor-browser
+cp -r /tmp/tor-browser-install/* $HOME/tor-browser/
+cp /tmp/tor-browser-install/tor-browser/start-tor-browser.desktop $HOME/Desktop/
+
+# Replace __SOCKS_PROXY__ in the tor prefs file
+file="$HOME/tor-browser/tor-browser/Browser/TorBrowser/Data/Browser/profile.default/prefs.js"
 
 if [ -f "$file" ]; then
   sed -i "s/__SOCKS_PROXY__/$socks_proxy/g" "$file"
@@ -24,23 +30,7 @@ else
   exit 1
 fi
 
-folder="$HOME/.config/BraveSoftware/Brave-Browser"
-
-# Fix lock profile Brave
-rm -f $folder/SingletonLock
-
-brave-browser &
-
-# tail chrome debug : Brave logging
-file="$folder/chrome_debug.log"
 while true; do
-  if [[ -f "$file" ]]; then
-    tail -F "$file"
-  else
-    echo "File $file not found, waiting..."
-    while [[ ! -f "$file" ]]; do
-      sleep 1
-    done
-    echo "Fichier $file found, resuming monitoring..."
-  fi
+  sleep 3600
+  echo "custom service sleeping..."
 done
